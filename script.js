@@ -3,7 +3,8 @@ const promptInput = document.getElementById('promptInput');
 const imageContainer = document.getElementById('imageContainer');
 const loadingIndicator = document.getElementById('loading');
 
-document.getElementById('generateButton').addEventListener('click', async () => {
+// Extract image generation logic into a reusable function
+async function generateImage() {
     const prompt = promptInput.value.trim();
     if (!prompt) {
         alert("Please enter a prompt.");
@@ -39,4 +40,13 @@ document.getElementById('generateButton').addEventListener('click', async () => 
     } finally {
         loadingIndicator.style.display = 'none';
     }
+}
+
+// Handle button click
+document.getElementById('generateButton').addEventListener('click', generateImage);
+
+// Handle form submission (Enter key press)
+form.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent page reload
+    generateImage();
 });
